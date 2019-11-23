@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>简单计算器</title>
+    </head>
+    <body>
+    <table border="0" width="400" align="center">
+       <!--  <form action="" method="post" οnsubmit="return false;"> -->
+            <caption><h1>简单计算器</h1></caption>
+            <tr>
+                <td>
+                    <input type="text" size="5" name="num1" id="numberA" value=""/>
+                </td>
+                <td>
+                    <select name="fuhao" id="Symbol">//下拉列表
+                        <option value="+"> + </option>
+                        <option 
+                            value="-"> - </option>
+                        <option 
+                            value="*"> * </option>
+                        <option 
+                            value="/"> / </option>
+                        <option 
+                            value="%"> % </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="num2" size="5" id="numberB" value=""/>
+                </td>
+                <td>
+                    =
+                </td>
+                <td>
+                    <input type="text" name="res" size="5" id="da" value=""/>
+                </td>
+            </tr>
+            <tr align="center">
+                <td>
+                    <input type="submit" value="计算" id="submit" name="submit">
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td colspan="4">
+                    <?php
+                        if($ok){
+                            echo "结果为: {$_POST['num1']} {$_POST['fuhao']} {$_POST['num2']} = {$sum}";}
+                        else{
+                            echo  $error;}
+                    ?>
+                </td>
+            </tr>
+        <!-- </form> -->
+    </table>
+    </body>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+    <script type="text/javascript">
+        $("#submit").click(function(){
+            var numberA = $("#numberA").val();
+            var numberB = $("#numberB").val();
+            var Symbol = $("#Symbol").val();
+             $.post("./test.php",{"numberA":numberA,"numberB":numberB,"Symbol":Symbol},function (re) {
+         if(re.code==1){
+            $("#da").val(re.ms);
+
+
+         }else{
+            
+         }
+     },'json')
+        })
+    </script>
+</html>
